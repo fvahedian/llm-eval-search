@@ -1,0 +1,14 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools >= 64"]
+
+[project]
+name = "llm_eval_agent"
+version = "0.1.0"
+dependencies = []
+requires-python = ">=3.11,<3.14"
+description = "Agentic LLM Evaluation System using NVIDIA NeMo Agent Toolkit"
+classifiers = ["Programming Language :: Python"]
+
+[project.entry-points.'nat.components']
+llm_eval_agent = "llm_eval_agent.register"

@@ -1,0 +1,41 @@
+name: LLM Evaluation CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install openai python-dotenv datasets pandas \
+                      rouge-score numpy ragas==0.1.21 \
+                      langchain-community langchain-google-vertexai
+
+      - name: Run unit tests
+        run: pytest tests/ -v
+
+      - name: Run evaluation quality gate
+        env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+        run: python ci/eval_gate.py
+
+      - name: Upload evaluation results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: eval-results
+          path: eval/ci_results.json

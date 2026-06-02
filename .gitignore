@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+*.egg-info/
+.DS_Store
+eval/logs/
+eval/all_results.csv
+eval/all_results.json
+eval/analysis_summary.json
+eval/ci_results.json
+data/squad_sample.csv

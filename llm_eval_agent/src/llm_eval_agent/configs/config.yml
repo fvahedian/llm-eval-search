@@ -1,0 +1,39 @@
+# llm_eval_agent/configs/config.yml
+# Agentic LLM Evaluation System
+# Run with: nat run --config_file llm_eval_agent/configs/config.yml --input "..."
+
+functions:
+
+  faithfulness_tool:
+    _type: faithfulness_tool
+    min_confidence: 0.5
+
+  llm_judge_tool:
+    _type: llm_judge_tool
+    mode: with_reference
+
+  rouge_tool:
+    _type: rouge_tool
+    relevance_threshold: 0.3
+
+  answer_relevance_tool:
+    _type: answer_relevance_tool
+    n_questions: 3
+
+llms:
+  nim_llm:
+    _type: nim
+    model_name: meta/llama-3.1-70b-instruct
+    temperature: 0.0
+
+workflow:
+  _type: react_agent
+  llm_name: nim_llm
+  tool_names:
+    - faithfulness_tool
+    - llm_judge_tool
+    - rouge_tool
+    - answer_relevance_tool
+  verbose: true
+  max_iterations: 10
+  parse_agent_response_max_retries: 3
