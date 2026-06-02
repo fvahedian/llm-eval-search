@@ -1,0 +1,16 @@
+openai
+python-dotenv
+datasets
+pandas
+rouge-score
+numpy
+ragas==0.1.21
+langchain-community
+langchain-google-vertexai
+nvidia-nat-core
+nvidia-nat-langchain
+langchain-nvidia-ai-endpoints
+langchain-text-splitters
+langchain-classic
+mcp
+pytest
