@@ -31,19 +31,19 @@ Answer relevance does not require a gold reference answer, but it performs poorl
 The recommended approach is to run multiple metrics and flag metric disagreements for human review.
 
 ---
-
 ## Architecture
 
-User question and context
--> GuardedGenerator
--> Generated answer
--> Faithfulness evaluator
--> Escalate to LLM judge if needed
--> PASS, FLAG, or BLOCK
--> Observability logs every decision
--> NeMo ReAct orchestrator decides which evaluators to run
--> MCP server exposes evaluation tools
--> CI/CD runs quality gates on every push
+The system flow is:
+
+1. User provides a question and context.
+2. GuardedGenerator generates an answer.
+3. Faithfulness evaluator checks whether the answer is supported by the context.
+4. The system escalates to the LLM judge when needed.
+5. The response is classified as PASS, FLAG, or BLOCK.
+6. Observability logs every decision.
+7. NeMo ReAct orchestrator decides which evaluators to run.
+8. MCP server exposes evaluation tools.
+9. CI/CD runs quality gates on every push.
 
 ---
 
