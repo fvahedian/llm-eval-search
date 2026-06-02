@@ -23,7 +23,8 @@ jobs:
         run: |
           pip install openai python-dotenv datasets pandas \
                       rouge-score numpy ragas==0.1.21 \
-                      langchain-community langchain-google-vertexai
+                      langchain-community langchain-google-vertexai \
+                      pytest
 
       - name: Run unit tests
         run: pytest tests/ -v
